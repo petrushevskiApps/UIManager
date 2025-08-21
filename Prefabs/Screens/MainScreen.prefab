@@ -53,7 +53,8 @@ MonoBehaviour:
   _isBackStackable: 1
   _globalUiElements: []
   _settingsButton: {fileID: 985452881610393338}
-  _startButton: {fileID: 2265350850759858984}
+  _startButton: {fileID: 0}
+  _levelsButton: {fileID: 0}
 --- !u!1 &649720799049612919
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,15 +884,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8924713100730998544}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2265350850759858984 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7253847502685930552, guid: 62c8b131ddd89cf4cab53eaf3b2a7d29,
-    type: 3}
-  m_PrefabInstance: {fileID: 8924713100730998544}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd031f86d1019254cb0a2e1a906d47c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
