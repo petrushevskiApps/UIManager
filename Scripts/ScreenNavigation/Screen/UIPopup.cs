@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using TMPro;
 using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Data;
@@ -23,10 +24,12 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         [Tooltip("Clickable background which disposes the popup when clicked.Same as the Back Button.")]
         private UIButton _popupClickableBackground;
 
+        [SerializeField] 
+        private PopupOpenCloseAnimation _openCloseAnimation;
+        
         [Header("Popup Properties")]
         [SerializeField]
         private TextMeshProUGUI _title;
-
         [SerializeField]
         private TextMeshProUGUI _message;
 
@@ -81,9 +84,25 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             gameObject.SetActive(true);
             PlaySfx(_uiAudioPalette.PopupShown);
             PauseGame(true);
+            if (_openCloseAnimation != null)
+            {
+                _openCloseAnimation.OpenPopup();
+            }
+        }
+        
+        public virtual void Hide()
+        {
+            if (_openCloseAnimation != null)
+            {
+                _openCloseAnimation.ClosePopup(HideInternal);
+            }
+            else
+            {
+                HideInternal();
+            }
         }
 
-        public virtual void Hide()
+        private void HideInternal()
         {
             PopupScreenHiddenEvent?.Invoke(this, EventArgs.Empty);
             _popupClickableBackground.OnClick -= GetPopupViewModel().BackgroundClicked;
@@ -99,7 +118,6 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             }
             PauseGame(false);
         }
-
         public virtual void Close()
         {
             PopupScreenClosedEvent?.Invoke(this, EventArgs.Empty);
