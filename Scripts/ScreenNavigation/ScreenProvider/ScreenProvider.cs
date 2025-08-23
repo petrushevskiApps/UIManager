@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TwoOneTwoGames.UIManager.ScreenNavigation
@@ -11,7 +12,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         public IScreen GetScreen<T>() where T : IScreen
         {
-            return _screens.Find(x => x.GetType() == typeof(T));
+            return _screens.OfType<T>().FirstOrDefault();
         }
     }
 }
