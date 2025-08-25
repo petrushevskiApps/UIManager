@@ -20,21 +20,37 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         [SerializeField]
         [Tooltip("List of all the Global UI Elements to be shown or hidden when this screen is active")]
         private List<GlobalUiElement> _globalUiElements;
+        
+        public bool IsPopup => false;
+        public bool IsBackStackable => _isBackStackable;
+        
+        // Events
+        public event EventHandler ScreenShownEvent;
+        public event EventHandler ScreenResumedEvent;
+        public event EventHandler ScreenHiddenEvent;
+        public event EventHandler ScreenClosedEvent;
 
         // Internal
         private RectTransform _screenRect;
 
         // Injected
         protected INavigationController NavigationController;
-
+        protected IPopupNavigation PopupNavigation;
+        
+        [Inject]
+        private void SetupScreen(
+            INavigationController navigationController,
+            IPopupNavigation popupNavigation)
+        {
+            NavigationController = navigationController;
+            PopupNavigation = popupNavigation;
+        }
+        
         protected void Awake()
         {
             _screenRect = GetComponent<RectTransform>();
             if (_activateSafeArea) ApplySafeArea();
         }
-
-        public bool IsPopup => false;
-        public bool IsBackStackable => _isBackStackable;
 
         public virtual void Show<TArguments>(TArguments navArguments)
         {
@@ -65,18 +81,6 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         public virtual void OnBackTriggered()
         {
             NavigationController.GoBack();
-        }
-
-        // Events
-        public event EventHandler ScreenShownEvent;
-        public event EventHandler ScreenResumedEvent;
-        public event EventHandler ScreenHiddenEvent;
-        public event EventHandler ScreenClosedEvent;
-
-        [Inject]
-        private void SetNavigationController(INavigationController navigationController)
-        {
-            NavigationController = navigationController;
         }
 
         private void ToggleGlobalUIElementsState(bool isToggled)

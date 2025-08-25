@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TwoOneTwoGames.UIManager.Data;
 using TwoOneTwoGames.UIManager.Interfaces;
 using TwoOneTwoGames.UIManager.Windows;
@@ -11,7 +9,7 @@ public class SimplifiedMainScreen : MainScreen
     private IBackgroundMusicAudioPalette _musicAudioPalette;
 
     [Inject]
-    public void Initialize(
+    public void InitializeSimplifiedMainScreen(
         IUiSoundSystem uiSoundSystem,
         IBackgroundMusicAudioPalette musicAudioPalette)
     {

@@ -8,7 +8,6 @@ namespace TwoOneTwoGames.UIManager.Windows
         IReactiveProperty<UIButtonViewData> PlayButton { get; }
         IReactiveProperty<UIButtonViewData> LevelsButton { get; }
         IReactiveProperty<UIButtonViewData> SettingsButton { get; }
-        void OnBackTriggered();
         void ScreenResumed();
         void ScreenHidden();
     }

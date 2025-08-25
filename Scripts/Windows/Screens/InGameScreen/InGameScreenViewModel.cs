@@ -53,14 +53,9 @@ namespace TwoOneTwoGames.UIManager.Windows
             LevelTitle.Value = $"Level {levelTitle}";
         }
 
-        public void PauseClicked()
+        private void PauseClicked()
         {
             _popupNavigation.ShowPausePopup();
-        }
-
-        public void OnBackTriggered()
-        {
-            _popupNavigation.ShowExitLevelPopup();
         }
     }
 }

@@ -76,10 +76,5 @@ namespace TwoOneTwoGames.UIManager.Windows
         {
             _uiLevelController.StartLevel();
         }
-
-        public virtual void OnBackTriggered()
-        {
-            _popupNavigation.ShowExitGamePopup();
-        }
     }
 }

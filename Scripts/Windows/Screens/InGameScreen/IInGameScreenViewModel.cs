@@ -9,8 +9,6 @@ namespace TwoOneTwoGames.UIManager.Windows
         IReactiveProperty<string> LevelTitle { get; }
         IReactiveProperty<UIProgressBarData> ProgressBarData { get; }
         IReactiveProperty<UIButtonViewData> PauseButton { get; }
-        void PauseClicked();
-        void OnBackTriggered();
         void ScreenResumed();
         void ScreenHidden();
     }

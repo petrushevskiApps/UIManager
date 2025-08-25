@@ -61,10 +61,5 @@ namespace TwoOneTwoGames.UIManager.Windows
             }
             _viewModel.ScreenHidden();
         }
-
-        public override void OnBackTriggered()
-        {
-            _viewModel.OnBackTriggered();
-        }
     }
 }
