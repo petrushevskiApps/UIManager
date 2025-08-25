@@ -43,8 +43,8 @@ public class PopupOpenCloseAnimation : MonoBehaviour
         
         // Create close animation sequence (reverse of open)
         _closeSequence = Sequence.Create(useUnscaledTime: true)
-            .Chain(Tween.Scale(transform, Vector3.zero, 0.9f, _outEase, useUnscaledTime: true))
-            .Group(Tween.Alpha(_canvasGroup, 0f, 0.5f, useUnscaledTime: true))
+            .Chain(Tween.Scale(transform, Vector3.zero, 0.5f, _outEase, useUnscaledTime: true))
+            .Group(Tween.Alpha(_canvasGroup, 0f, 0.25f, useUnscaledTime: true))
             .OnComplete(() =>
             {
                 _closeSequence = null;

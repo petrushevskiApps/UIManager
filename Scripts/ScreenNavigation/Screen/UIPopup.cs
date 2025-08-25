@@ -94,19 +94,26 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         {
             if (_openCloseAnimation != null)
             {
-                _openCloseAnimation.ClosePopup(HideInternal);
+                HideInternal(false);
+                _openCloseAnimation.ClosePopup(() =>
+                {
+                    gameObject.SetActive(false);
+                });
             }
             else
             {
-                HideInternal();
+                HideInternal(true);
             }
         }
 
-        private void HideInternal()
+        private void HideInternal(bool hideObject)
         {
             PopupScreenHiddenEvent?.Invoke(this, EventArgs.Empty);
             _popupClickableBackground.OnClick -= GetPopupViewModel().BackgroundClicked;
-            gameObject.SetActive(false);
+            if (hideObject)
+            {
+                gameObject.SetActive(false);
+            }
             if (_title != null)
             {
                 GetPopupViewModel().Title?.Unsubscribe(SetTitle);

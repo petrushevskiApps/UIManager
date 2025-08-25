@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
