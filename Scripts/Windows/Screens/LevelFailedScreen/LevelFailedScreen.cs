@@ -42,12 +42,31 @@ namespace TwoOneTwoGames.UIManager.Windows
         public override void Resume()
         {
             base.Resume();
-            
-            ViewModel.Title.Subscribe(_title.SetData);
-            ViewModel.ReviveButton.Subscribe(_reviveButton.SetData);
-            ViewModel.ReplayButton.Subscribe(_replayButton.SetData);
-            ViewModel.HomeButton.Subscribe(_homeButton.SetData);
-            ViewModel.SettingsButton.Subscribe(_settingsButton.SetData);
+
+            if (_title != null)
+            {
+                ViewModel.Title.Subscribe(_title.SetData);
+            }
+
+            if (_reviveButton != null)
+            {
+                ViewModel.ReviveButton.Subscribe(_reviveButton.SetData);
+            }
+
+            if (_replayButton != null)
+            {
+                ViewModel.ReplayButton.Subscribe(_replayButton.SetData);
+            }
+
+            if (_replayButton != null)
+            {
+                ViewModel.HomeButton.Subscribe(_homeButton.SetData);
+            }
+
+            if (_settingsButton != null)
+            {
+                ViewModel.SettingsButton.Subscribe(_settingsButton.SetData);
+            }
             
             _uiHapticsController.LevelFailed();
             ViewModel.ScreenShown();
@@ -57,11 +76,30 @@ namespace TwoOneTwoGames.UIManager.Windows
         {
             base.Hide();
             
-            ViewModel.Title.Unsubscribe(_title.SetData);
-            ViewModel.ReplayButton.Unsubscribe(_reviveButton.SetData);
-            ViewModel.ReplayButton.Unsubscribe(_replayButton.SetData);
-            ViewModel.HomeButton.Unsubscribe(_homeButton.SetData);
-            ViewModel.SettingsButton.Unsubscribe(_settingsButton.SetData);
+            if (_title != null)
+            {
+                ViewModel.Title.Unsubscribe(_title.SetData);
+            }
+
+            if (_reviveButton != null)
+            {
+                ViewModel.ReviveButton.Unsubscribe(_reviveButton.SetData);
+            }
+
+            if (_replayButton != null)
+            {
+                ViewModel.ReplayButton.Unsubscribe(_replayButton.SetData);
+            }
+
+            if (_replayButton != null)
+            {
+                ViewModel.HomeButton.Unsubscribe(_homeButton.SetData);
+            }
+
+            if (_settingsButton != null)
+            {
+                ViewModel.SettingsButton.Unsubscribe(_settingsButton.SetData);
+            }
 
             ViewModel.ScreenHidden();
         }

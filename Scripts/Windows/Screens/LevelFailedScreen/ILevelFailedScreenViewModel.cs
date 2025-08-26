@@ -1,4 +1,5 @@
-﻿using TwoOneTwoGames.UIManager.Components.Interactive;
+﻿using System;
+using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Utilities.ReactiveProperty;
 
 namespace TwoOneTwoGames.UIManager.Windows
@@ -14,5 +15,6 @@ namespace TwoOneTwoGames.UIManager.Windows
         IReactiveProperty<UIButtonViewData> HomeButton { get; }
         IReactiveProperty<UIButtonViewData> SettingsButton { get; }
         IReactiveProperty<string> Title { get; }
+        void SetReviveButtonTitle(bool isVisible, string title = null, Action onReviveAction = null);
     }
 }

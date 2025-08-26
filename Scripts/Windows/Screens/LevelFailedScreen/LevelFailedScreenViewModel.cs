@@ -1,4 +1,6 @@
-﻿using TwoOneTwoGames.UIManager.Components.Interactive;
+﻿using System;
+using TwoOneTwoGames.UIManager.Components.Interactive;
+using TwoOneTwoGames.UIManager.Components.NonInteractive.NonInteractive.ViewData;
 using TwoOneTwoGames.UIManager.Data;
 using TwoOneTwoGames.UIManager.Interfaces;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
@@ -10,7 +12,7 @@ namespace TwoOneTwoGames.UIManager.Windows
     {
         // Reactive Properties
         public IReactiveProperty<string> Title { get; }
-        public IReactiveProperty<UIButtonViewData> ReviveButton { get; }
+        public IReactiveProperty<UIButtonViewData> ReviveButton { get; private set; }
         public IReactiveProperty<UIButtonViewData> ReplayButton { get; }
         public IReactiveProperty<UIButtonViewData> HomeButton { get; }
         public IReactiveProperty<UIButtonViewData> SettingsButton { get; }
@@ -98,6 +100,14 @@ namespace TwoOneTwoGames.UIManager.Windows
             _popupNavigation.ShowSettingsPopup();
         }
 
+        public void SetReviveButtonTitle(bool isVisible, string title, Action onReviveAction)
+        {
+            ReviveButton = new ReactiveProperty<UIButtonViewData>(new UIButtonViewData(
+                isVisible: isVisible,
+                label: new TextViewData(true, title),
+                isInteractive: false,
+                clickAction: ReviveButtonClicked));
+        }
         private void GoToMainScreen()
         {
             _uiLevelController.LeaveLevel();
