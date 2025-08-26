@@ -24,7 +24,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         public void ShowLevelCompletedScreen(LevelCompletedArguments arguments)
         {
-            _navigationController.ShowScreen<LevelCompletedScreen, LevelCompletedArguments>(arguments);
+            _navigationController.ShowScreen<FullLevelCompletedScreen, LevelCompletedArguments>(arguments);
         }
 
         public void ShowLevelFailedScreen()

@@ -8,7 +8,7 @@ using Zenject;
 
 namespace TwoOneTwoGames.UIManager.Windows
 {
-    public class LevelCompletedScreen : UIScreen
+    public class FullLevelCompletedScreen : UIScreen
     {
         [SerializeField]
         private UIStars _stars;
@@ -64,15 +64,41 @@ namespace TwoOneTwoGames.UIManager.Windows
         {
             base.Resume();
             ViewModel.ScreenResumed();
-            
-            ViewModel.ReplayButton.Subscribe(_replayButton.SetData);
-            ViewModel.HomeButton.Subscribe(_homeButton.SetData);
-            ViewModel.SettingsButton.Subscribe(_settingsButton.SetData);
-            ViewModel.NextButton.Subscribe(_nextButton.SetData);
-            ViewModel.DoubleRewardButton.Subscribe(_doubleRewardButton.SetData);
-            
-            ViewModel.EarnedStars.Subscribe(_stars.SetData);
-            ViewModel.Title.Subscribe(_title.SetData);
+
+            if (_replayButton != null)
+            {
+                ViewModel.ReplayButton.Subscribe(_replayButton.SetData);
+            }
+
+            if (_homeButton != null)
+            {
+                ViewModel.HomeButton.Subscribe(_homeButton.SetData);
+            }
+
+            if (_settingsButton != null)
+            {
+                ViewModel.SettingsButton.Subscribe(_settingsButton.SetData);
+            }
+
+            if (_nextButton != null)
+            {
+                ViewModel.NextButton.Subscribe(_nextButton.SetData);
+            }
+
+            if (_doubleRewardButton != null)
+            {
+                ViewModel.DoubleRewardButton.Subscribe(_doubleRewardButton.SetData);
+            }
+
+            if (_stars != null)
+            {
+                ViewModel.EarnedStars.Subscribe(_stars.SetData);
+            }
+
+            if (_title != null)
+            {
+                ViewModel.Title.Subscribe(_title.SetData);
+            }
             if (_earnedCoinsText != null)
             {
                 ViewModel.EarnedCoinsText.Subscribe(_earnedCoinsText.SetData);
@@ -83,17 +109,43 @@ namespace TwoOneTwoGames.UIManager.Windows
         {
             base.Hide();
             
-            ViewModel.ReplayButton.Unsubscribe(_replayButton.SetData);
-            ViewModel.HomeButton.Unsubscribe(_homeButton.SetData);
-            ViewModel.SettingsButton.Unsubscribe(_settingsButton.SetData);
-            ViewModel.NextButton.Unsubscribe(_nextButton.SetData);
-            ViewModel.DoubleRewardButton.Unsubscribe(_doubleRewardButton.SetData);
-            
-            ViewModel.EarnedStars.Unsubscribe(_stars.SetData);
-            ViewModel.Title.Unsubscribe(_title.SetData);
+            if (_replayButton != null)
+            {
+                ViewModel.ReplayButton.Unsubscribe(_replayButton.SetData);
+            }
+
+            if (_homeButton != null)
+            {
+                ViewModel.HomeButton.Unsubscribe(_homeButton.SetData);
+            }
+
+            if (_settingsButton != null)
+            {
+                ViewModel.SettingsButton.Unsubscribe(_settingsButton.SetData);
+            }
+
+            if (_nextButton != null)
+            {
+                ViewModel.NextButton.Unsubscribe(_nextButton.SetData);
+            }
+
+            if (_doubleRewardButton != null)
+            {
+                ViewModel.DoubleRewardButton.Unsubscribe(_doubleRewardButton.SetData);
+            }
+
+            if (_stars != null)
+            {
+                ViewModel.EarnedStars.Unsubscribe(_stars.SetData);
+            }
+
+            if (_title != null)
+            {
+                ViewModel.Title.Unsubscribe(_title.SetData);
+            }
             if (_earnedCoinsText != null)
             {
-                ViewModel.EarnedCoinsText.Subscribe(_earnedCoinsText.SetData);
+                ViewModel.EarnedCoinsText.Unsubscribe(_earnedCoinsText.SetData);
             }
             ViewModel.ScreenHidden();
         }

@@ -57,10 +57,10 @@ namespace TwoOneTwoGames.UIManager.Windows
             SettingsButton = new ReactiveProperty<UIButtonViewData>(new UIButtonViewData(
                 clickAction: SettingsButtonClicked));
             NextButton = new ReactiveProperty<UIButtonViewData>(new UIButtonViewData(
-                label: new TextViewData(true,  "Next"),
+                label: new TextViewData(true,  "Continue"),
                 clickAction: NextLevelButtonClicked));
             DoubleRewardButton = new ReactiveProperty<UIButtonViewData>(new UIButtonViewData(
-                label: new TextViewData(true,  "x2"),
+                label: new TextViewData(true,  "x2 Reward"),
                 isInteractive: false,
                 clickAction: DoubleRewardButtonClicked));
             
@@ -98,6 +98,7 @@ namespace TwoOneTwoGames.UIManager.Windows
         public virtual void SetEarnedPoints(int points)
         {
             EarnedPoints = points;
+            EarnedCoinsText.Value = points.ToString();
         }
 
         public virtual void SetEarnedStars(int earnedStars)
