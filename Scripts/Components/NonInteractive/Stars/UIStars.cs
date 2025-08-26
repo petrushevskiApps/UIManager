@@ -22,8 +22,7 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
         private bool _playSfx = true;
 
         [SerializeField]
-        [Tooltip("Should the star fills be with delay or instantly.")]
-        private bool _instantStarsFill = true;
+        private float _delayBetweenStars = 0.4f;
         
         // Injected
         private IUiAudioPalette _uiAudioPalette;
@@ -53,7 +52,6 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
             gameObject.SetActive(true);
             StartCoroutine(DelayInvoke(() =>
             {
-                float baseDelay = _instantStarsFill ? 0 : 0.4f;
                 for (var i = 0; i < starsCount; i++)
                 {
                     var index = i;
@@ -64,7 +62,7 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
                         {
                             _uiSoundSystem?.PlayUiSoundEffect(_uiAudioPalette.StarShown);
                         }
-                    },  baseDelay * index));
+                    },  _delayBetweenStars * index));
                 }
             }, _delayPresentationStart));
             
