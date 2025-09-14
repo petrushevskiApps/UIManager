@@ -50,24 +50,48 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
         public void SetData(int starsCount)
         {
             gameObject.SetActive(true);
-            StartCoroutine(DelayInvoke(() =>
-            {
-                for (var i = 0; i < starsCount; i++)
-                {
-                    var index = i;
-                    StartCoroutine(DelayInvoke(() =>
-                    {
-                        _stars[index].SetActive(true);
-                        if (_playSfx)
-                        {
-                            _uiSoundSystem?.PlayUiSoundEffect(_uiAudioPalette.StarShown);
-                        }
-                    },  _delayBetweenStars * index));
-                }
-            }, _delayPresentationStart));
             
+            if (_delayPresentationStart == 0 || !gameObject.activeInHierarchy)
+            {
+                ToggleStars(starsCount);
+            }
+            else
+            {
+                StartCoroutine(DelayInvoke(() =>
+                {
+                    ToggleStars(starsCount);
+                }, _delayPresentationStart));
+            }
         }
 
+        private void ToggleStars(int starsCount)
+        {
+            for (var i = 0; i < starsCount; i++)
+            {
+                var index = i;
+                if (_delayBetweenStars == 0 || !gameObject.activeInHierarchy)
+                {
+                    ToggleStar(_stars[index]);
+                }
+                else
+                {
+                    StartCoroutine(DelayInvoke(() =>
+                    {
+                        ToggleStar(_stars[index]);
+                    },  _delayBetweenStars * index));
+                }
+            }
+        }
+
+        private void ToggleStar(GameObject star)
+        {
+            star.SetActive(true);
+            if (_playSfx)
+            {
+                _uiSoundSystem?.PlayUiSoundEffect(_uiAudioPalette.StarShown);
+            }
+        }
+        
         private IEnumerator DelayInvoke(Action action, float delaySeconds)
         {
             yield return new WaitForSeconds(delaySeconds);
