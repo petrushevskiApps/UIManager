@@ -1,4 +1,5 @@
 ﻿using TwoOneTwoGames.UIManager.Windows.Popups;
+using TwoOneTwoGames.UIManager.Windows.TutorialPopup;
 using TwoOneTwoGames.ZenRings.UserInterface.Windows;
 
 namespace TwoOneTwoGames.UIManager.ScreenNavigation
@@ -12,5 +13,6 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         public void ShowExitGamePopup();
         public void ShowIconMessagePopup(IconMessagePopupArguments args);
         void ShowBuyBoosterPopup(BuyBoosterPopupArguments args);
+        void ShowTutorialPopup(TutorialPopupArguments args);
     }
 }
