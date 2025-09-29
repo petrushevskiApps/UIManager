@@ -109,6 +109,16 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
 
         public void BackgroundClicked()
         {
+            Close();
+        }
+
+        public void CloseClicked()
+        {
+            Close();
+        }
+
+        private void Close()
+        {
             _discardAction?.Invoke();
             _navigationController.GoBack();
         }

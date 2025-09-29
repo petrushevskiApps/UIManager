@@ -68,5 +68,10 @@ namespace TwoOneTwoGames.UIManager.Windows.TutorialPopup
             _popupResultAction?.Invoke();
         }
 
+        public void CloseClicked()
+        {
+            _navigationController.GoBack();
+            _popupResultAction?.Invoke();
+        }
     }
 }

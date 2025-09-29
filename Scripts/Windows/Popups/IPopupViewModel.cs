@@ -7,5 +7,6 @@ namespace TwoOneTwoGames.UIManager.Windows
         IReactiveProperty<string> Title { get; }
         IReactiveProperty<string> Message { get; }
         void BackgroundClicked();
+        void CloseClicked();
     }
 }

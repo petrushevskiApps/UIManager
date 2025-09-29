@@ -24,6 +24,10 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         [Tooltip("Clickable background which disposes the popup when clicked.Same as the Back Button.")]
         private UIButton _popupClickableBackground;
 
+        [SerializeField]
+        [Tooltip("Button which discards popups.")]
+        private UIButton _closeButton;
+        
         [SerializeField] 
         private PopupOpenCloseAnimation _openCloseAnimation;
         
@@ -72,6 +76,10 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         {
             PopupScreenResumedEvent?.Invoke(this, EventArgs.Empty);
             _popupClickableBackground.OnClick += GetPopupViewModel().BackgroundClicked;
+            if (_closeButton != null)
+            {
+                _closeButton.OnClick += GetPopupViewModel().CloseClicked;
+            }
             if (_title != null)
             {
                 GetPopupViewModel().Title?.Subscribe(SetTitle, true);
@@ -110,6 +118,10 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         {
             PopupScreenHiddenEvent?.Invoke(this, EventArgs.Empty);
             _popupClickableBackground.OnClick -= GetPopupViewModel().BackgroundClicked;
+            if (_closeButton != null)
+            {
+                _closeButton.OnClick -= GetPopupViewModel().CloseClicked;
+            }
             if (hideObject)
             {
                 gameObject.SetActive(false);

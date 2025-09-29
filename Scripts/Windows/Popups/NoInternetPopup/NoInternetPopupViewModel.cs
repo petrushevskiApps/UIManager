@@ -31,6 +31,11 @@ namespace TwoOneTwoGames.UIManager.Windows
             _navigationController.GoBack();
         }
 
+        public void CloseClicked()
+        {
+            _navigationController.GoBack();
+        }
+
         public void OkButtonClicked()
         {
             _navigationController.GoBack();

@@ -44,6 +44,11 @@ namespace TwoOneTwoGames.UIManager.Windows
             _navigationController.GoBack();
         }
 
+        public void CloseClicked()
+        {
+            _navigationController.GoBack();
+        }
+
         public void ExitLevel()
         {
             _uiLevelController.LeaveLevel();
