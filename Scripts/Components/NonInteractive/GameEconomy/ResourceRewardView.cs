@@ -48,11 +48,19 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive.GameEconomy
 
         private void SetValue(float value)
         {
+            if (_resourceValueText == null)
+            {
+                return;
+            }
             _resourceValueText.text = value.ToString(CultureInfo.InvariantCulture);
         }
 
         private void SetIcon(int rewardId)
         {
+            if (_resourceIcon == null)
+            {
+                return;
+            }
             _resourceIcon.sprite = _uiGameEconomyIconPalette.EconomyResourceIcons[rewardId];
         }
     }
