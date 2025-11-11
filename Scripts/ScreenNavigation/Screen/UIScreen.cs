@@ -36,14 +36,17 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         // Injected
         protected INavigationController NavigationController;
         protected IPopupNavigation PopupNavigation;
+        protected IScreenNavigation ScreenNavigation;
         
         [Inject]
         private void SetupScreen(
             INavigationController navigationController,
+            IScreenNavigation screenNavigation,
             IPopupNavigation popupNavigation)
         {
             NavigationController = navigationController;
             PopupNavigation = popupNavigation;
+            ScreenNavigation = screenNavigation;
         }
         
         protected void Awake()

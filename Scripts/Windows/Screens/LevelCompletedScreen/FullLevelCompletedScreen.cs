@@ -1,14 +1,12 @@
 using TMPro;
 using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Components.NonInteractive;
-using TwoOneTwoGames.UIManager.Interfaces;
-using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using Zenject;
 
 namespace TwoOneTwoGames.UIManager.Windows
 {
-    public class FullLevelCompletedScreen : UIScreen
+    public class FullLevelCompletedScreen : LevelCompletedScreen
     {
         [SerializeField]
         private UIStars _stars;
@@ -35,18 +33,13 @@ namespace TwoOneTwoGames.UIManager.Windows
         [SerializeField]
         private UIButton _doubleRewardButton;
 
-        private IUiHapticsController _uiHapticsController;
-
         // Injected
         protected ILevelCompletedScreenViewModel ViewModel;
 
         [Inject]
-        private void Initialize(
-            ILevelCompletedScreenViewModel viewModel,
-            IUiHapticsController uiHapticsController)
+        private void Initialize(ILevelCompletedScreenViewModel viewModel)
         {
             ViewModel = viewModel;
-            _uiHapticsController = uiHapticsController;
         }
 
         public override void Show<TArguments>(TArguments navArguments)
@@ -56,7 +49,6 @@ namespace TwoOneTwoGames.UIManager.Windows
             {
                 ViewModel.SetEarnedPoints(arguments.EarnedPoints);
                 ViewModel.SetEarnedStars(arguments.EarnedStars);
-                _uiHapticsController.LevelCompleted();
             }
         }
 
@@ -154,11 +146,6 @@ namespace TwoOneTwoGames.UIManager.Windows
         {
             base.Close();
             ViewModel.ScreenClosed();
-        }
-
-        public override void OnBackTriggered()
-        {
-            ViewModel.OnBackTriggered();
         }
     }
 }
