@@ -42,6 +42,7 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive.GameEconomy
             {
                 return;
             }
+            gameObject.SetActive(true);
             SetValue(resource.value);
             SetIcon(resource.id);
         }
