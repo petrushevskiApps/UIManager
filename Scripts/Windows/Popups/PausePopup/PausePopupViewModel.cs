@@ -1,5 +1,6 @@
 ﻿using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Components.NonInteractive.NonInteractive.ViewData;
+using TwoOneTwoGames.UIManager.Data;
 using TwoOneTwoGames.UIManager.Interfaces;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using TwoOneTwoGames.UIManager.Utilities.ReactiveProperty;
@@ -20,16 +21,19 @@ namespace TwoOneTwoGames.UIManager.Windows
         // Injected
         private readonly IPopupNavigation _popupNavigation;
         private readonly IUILevelController _uiLevelController;
+        private readonly IUiAnalyticsEventsHandler _analyticsEventsHandler;
         private readonly INavigationController _navigationController;
 
         public PausePopupViewModel(
             IPopupNavigation popupNavigation,
             INavigationController navigationController,
-            IUILevelController uiLevelController)
+            IUILevelController uiLevelController,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             _popupNavigation = popupNavigation;
             _navigationController = navigationController;
             _uiLevelController = uiLevelController;
+            _analyticsEventsHandler = analyticsEventsHandler;
 
 
             Title = new ReactiveProperty<string>("Pause");
@@ -48,31 +52,37 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         protected virtual void RestartClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "RestartButton");
             _uiLevelController.RestartLevel();
         }
 
         protected virtual void HomeClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "HomeButton");
             _popupNavigation.ShowExitLevelPopup();
         }
 
         protected virtual void PlayClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "ResumeButton");
             _navigationController.GoBack();
         }
 
         protected virtual void SettingsClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "SettingsButton");
             _popupNavigation.ShowSettingsPopup();
         }
 
         public void BackgroundClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "BackgroundButton");
             _navigationController.GoBack();
         }
 
         public void CloseClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "CloseButton");
             _navigationController.GoBack();
         }
     }
