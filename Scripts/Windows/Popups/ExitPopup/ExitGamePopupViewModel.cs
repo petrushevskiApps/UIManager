@@ -1,5 +1,6 @@
 using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Components.NonInteractive.NonInteractive.ViewData;
+using TwoOneTwoGames.UIManager.Data;
 using TwoOneTwoGames.UIManager.Interfaces;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using TwoOneTwoGames.UIManager.Utilities.ReactiveProperty;
@@ -17,13 +18,16 @@ namespace TwoOneTwoGames.UIManager.Windows
         // Injected
         private readonly INavigationController _navigationController;
         private readonly IExitAppController _exitAppController;
+        private readonly IUiAnalyticsEventsHandler _analyticsEventsHandler;
 
         public ExitGamePopupViewModel(
             INavigationController navigationController,
-            IExitAppController exitAppController)
+            IExitAppController exitAppController,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             _navigationController = navigationController;
             _exitAppController = exitAppController;
+            _analyticsEventsHandler = analyticsEventsHandler;
 
             ConfirmButton = new ReactiveProperty<UIButtonViewData>(new UIButtonViewData(
                 label: new TextViewData(true, "Yes"),
@@ -35,21 +39,25 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         public void BackgroundClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "BackgroundButton");
             _navigationController.GoBack();
         }
 
         public void CloseClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "CloseButton");
             _navigationController.GoBack();
         }
 
         private void DiscardPopupClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "NoButton");
             _navigationController.GoBack();
         }
 
         private void ExitApp()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "YesButton");
             _exitAppController.ExitApp();
         }
     }
