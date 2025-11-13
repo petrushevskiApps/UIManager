@@ -1,7 +1,9 @@
 ﻿using System;
 using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Components.NonInteractive.NonInteractive.ViewData;
+using TwoOneTwoGames.UIManager.Data;
 using TwoOneTwoGames.UIManager.Data.ExtensionsData;
+using TwoOneTwoGames.UIManager.Interfaces;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using TwoOneTwoGames.UIManager.Utilities.ReactiveProperty;
 using UnityEngine;
@@ -23,10 +25,15 @@ namespace TwoOneTwoGames.UIManager.Windows.TutorialPopup
 
         // Injected
         private readonly INavigationController _navigationController;
+        private readonly IUiAnalyticsEventsHandler _analyticsEventsHandler;
 
-        public TutorialPopupViewModel(INavigationController navigationController)
+        public TutorialPopupViewModel(
+            INavigationController navigationController,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             _navigationController = navigationController;
+            _analyticsEventsHandler = analyticsEventsHandler;
+            
             Title = new ReactiveProperty<string>();
             Message = new ReactiveProperty<string>();
             VideoTutorial = new ReactiveProperty<VideoPlayerViewData>();
@@ -58,18 +65,21 @@ namespace TwoOneTwoGames.UIManager.Windows.TutorialPopup
 
         private void OkButtonClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "OkButton");
             _navigationController.GoBack();
             _popupResultAction?.Invoke();
         }
         
         public void BackgroundClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "BackgroundButton");
             _navigationController.GoBack();
             _popupResultAction?.Invoke();
         }
 
         public void CloseClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "CloseButton");
             _navigationController.GoBack();
             _popupResultAction?.Invoke();
         }

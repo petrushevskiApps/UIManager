@@ -18,6 +18,7 @@ namespace TwoOneTwoGames.UIManager.Windows.TutorialPopup
         // Injected
         private ITutorialPopupViewModel _viewModel;
 
+        public override string ScreenTitle => gameObject.name + "_" + _viewModel.Title.Value;
 
         protected override IPopupViewModel GetPopupViewModel()
         {
