@@ -1,6 +1,7 @@
 ﻿using System;
 using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Components.NonInteractive.NonInteractive.ViewData;
+using TwoOneTwoGames.UIManager.Data;
 using TwoOneTwoGames.UIManager.Data.IconPalette;
 using TwoOneTwoGames.UIManager.Interfaces;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
@@ -23,6 +24,7 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
         private Action _onSuccessfulBuy;
         private int _resourceId;
         private int _resourceAmountRequired;
+        private float _popupShownTime;
 
         // Injected
         private readonly IUiGameEconomyPresenter _economyPresenter;
@@ -30,19 +32,22 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
         private readonly INavigationController _navigationController;
         private readonly IUiGameEconomyIconPalette _gameEconomyIconPalette;
         private readonly IAdsIconPalette _adsIconPalette;
+        private readonly IUiAnalyticsEventsHandler _analyticsEventsHandler;
 
         public BuyBoosterPopupViewModel(
             IUiGameEconomyPresenter economyPresenter,
             IUiGameEconomyController economyController,
             INavigationController navigationController,
             IUiGameEconomyIconPalette gameEconomyIconPalette,
-            IAdsIconPalette adsIconPalette)
+            IAdsIconPalette adsIconPalette,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             _economyPresenter = economyPresenter;
             _economyController = economyController;
             _navigationController = navigationController;
             _gameEconomyIconPalette = gameEconomyIconPalette;
             _adsIconPalette = adsIconPalette;
+            _analyticsEventsHandler = analyticsEventsHandler;
 
             Title = new ReactiveProperty<string>();
             Message = new ReactiveProperty<string>();
@@ -89,14 +94,27 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
                 clickAction: OnRewardedAdClicked);
         }
 
+        public void PopupResumed()
+        {
+            _popupShownTime = Time.realtimeSinceStartup;
+        }
+        
         private void OnRewardedAdClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(
+                UiAnalyticsKeys.PlayerActions.Click, 
+                "RewardedAdButton", 
+                GetPopupActiveTime());
             _onSuccessfulBuy?.Invoke();
             _navigationController.GoBack();
         }
 
         private void OnBuyButtonClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(
+                UiAnalyticsKeys.PlayerActions.Click, 
+                "BuyButton", 
+                GetPopupActiveTime());
             _economyController.UseCurrency(_resourceId, _resourceAmountRequired);
             _onSuccessfulBuy?.Invoke();
             _navigationController.GoBack();
@@ -110,11 +128,19 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
 
         public void BackgroundClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(
+                UiAnalyticsKeys.PlayerActions.Click, 
+                "BackgroundButton", 
+                GetPopupActiveTime());
             Close();
         }
 
         public void CloseClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(
+                UiAnalyticsKeys.PlayerActions.Click, 
+                "CloseButton", 
+                GetPopupActiveTime());
             Close();
         }
 
@@ -122,6 +148,11 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
         {
             _discardAction?.Invoke();
             _navigationController.GoBack();
+        }
+        
+        private float GetPopupActiveTime()
+        {
+            return Time.realtimeSinceStartup - _popupShownTime;
         }
     }
 }

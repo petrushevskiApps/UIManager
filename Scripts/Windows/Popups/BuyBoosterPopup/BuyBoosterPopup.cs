@@ -18,7 +18,9 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
 
         [SerializeField]
         private UIButton _rewardedAdButton;
-
+        
+        public override string ScreenTitle => gameObject.name + "_" + _viewModel.Title.Value;
+        
         // Internal
 
         // Injected
@@ -58,6 +60,7 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
         {
             base.Resume();
 
+            _viewModel.PopupResumed();
             _buyEchoesButton.OnClick += Close;
             _rewardedAdButton.OnClick += Close;
             
