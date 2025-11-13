@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Components.NonInteractive.NonInteractive.ViewData;
+using TwoOneTwoGames.UIManager.Data;
+using TwoOneTwoGames.UIManager.Interfaces;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using TwoOneTwoGames.UIManager.Utilities.ReactiveProperty;
 using UnityEngine;
@@ -18,14 +20,18 @@ namespace TwoOneTwoGames.ZenRings.UserInterface.Windows
 
         // Internal
         private Action _discardAction;
+        private float _popupShownTime;
 
         // Injected
         private readonly INavigationController _navigationController;
+        private readonly IUiAnalyticsEventsHandler _analyticsEventsHandler;
 
         public IconMessagePopupViewModel(
-            INavigationController navigationController)
+            INavigationController navigationController,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             _navigationController = navigationController;
+            _analyticsEventsHandler = analyticsEventsHandler;
 
             Title = new ReactiveProperty<string>();
             Message = new ReactiveProperty<string>();
@@ -50,14 +56,27 @@ namespace TwoOneTwoGames.ZenRings.UserInterface.Windows
             }
         }
 
+        public void PopupResumed()
+        {
+            _popupShownTime = Time.realtimeSinceStartup;
+        }
+        
         public void BackgroundClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(
+                UiAnalyticsKeys.PlayerActions.Click, 
+                "BackgroundButton", 
+                GetPopupActiveTime());
             _discardAction?.Invoke();
             _navigationController.GoBack();
         }
 
         public void CloseClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(
+                UiAnalyticsKeys.PlayerActions.Click, 
+                "CloseButton", 
+                GetPopupActiveTime());
             _discardAction?.Invoke();
             _navigationController.GoBack();
         }
@@ -66,6 +85,11 @@ namespace TwoOneTwoGames.ZenRings.UserInterface.Windows
         {
             ButtonViews.Clear();
             _discardAction = null;
+        }
+        
+        private float GetPopupActiveTime()
+        {
+            return Time.realtimeSinceStartup - _popupShownTime;
         }
     }
 }

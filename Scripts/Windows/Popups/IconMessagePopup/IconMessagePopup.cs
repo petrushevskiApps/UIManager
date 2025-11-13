@@ -19,6 +19,8 @@ namespace TwoOneTwoGames.ZenRings.UserInterface.Windows
         [SerializeField]
         private UIButton _buttonPrefab;
         
+        public override string ScreenTitle => gameObject.name + "_" + _viewModel.Title.Value;
+        
         // Internal
         private readonly List<UIButton> _buttons = new();
         private IIconMessagePopupViewModel _viewModel;
@@ -75,6 +77,7 @@ namespace TwoOneTwoGames.ZenRings.UserInterface.Windows
         {
             base.Resume();
             
+            _viewModel.PopupResumed();
             _viewModel.Icon.Subscribe(_icon.SetData);
             
             _viewModel.ButtonViews.Zip(_buttons, (property, button) => (property, button))
