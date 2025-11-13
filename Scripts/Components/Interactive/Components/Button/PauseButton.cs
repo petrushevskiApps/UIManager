@@ -1,4 +1,6 @@
-﻿using TwoOneTwoGames.UIManager.ScreenNavigation;
+﻿using TwoOneTwoGames.UIManager.Data;
+using TwoOneTwoGames.UIManager.Interfaces;
+using TwoOneTwoGames.UIManager.ScreenNavigation;
 using UnityEngine;
 using Zenject;
 
@@ -8,10 +10,14 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive
     {
         private UIButton _uiButton;
         private IPopupNavigation _popupNavigation;
+        private IUiAnalyticsEventsHandler _analyticsEventsHandler;
 
         [Inject]
-        private void Initialize(IPopupNavigation popupNavigation)
+        private void Initialize(
+            IUiAnalyticsEventsHandler analyticsEventsHandler,
+            IPopupNavigation popupNavigation)
         {
+            _analyticsEventsHandler = analyticsEventsHandler;
             _popupNavigation = popupNavigation;
         }
         private void Awake()
@@ -24,6 +30,7 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive
 
         private void Clicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "PauseButton");
             _popupNavigation.ShowPausePopup();
         }
     }
