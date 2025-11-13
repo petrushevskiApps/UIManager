@@ -85,6 +85,7 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
                     color: Color.white,
                     isActive: true),
                 isInteractive: false,
+                isVisible: false,
                 clickAction: OnRewardedAdClicked);
         }
 
