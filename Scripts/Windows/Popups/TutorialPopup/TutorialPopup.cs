@@ -50,7 +50,7 @@ namespace TwoOneTwoGames.UIManager.Windows.TutorialPopup
         public override void Resume()
         {
             base.Resume();
-
+            _viewModel.PopupResumed();
             _viewModel.VideoTutorial.Subscribe(_videoPlayer.SetData);
             _viewModel.ButtonViewData.Subscribe(_button.SetData);
         }

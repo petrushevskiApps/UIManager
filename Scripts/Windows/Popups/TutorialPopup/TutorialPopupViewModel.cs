@@ -22,7 +22,8 @@ namespace TwoOneTwoGames.UIManager.Windows.TutorialPopup
 
         // Internal
         private Action _popupResultAction;
-
+        private float _popupShownTime;
+        
         // Injected
         private readonly INavigationController _navigationController;
         private readonly IUiAnalyticsEventsHandler _analyticsEventsHandler;
@@ -63,25 +64,35 @@ namespace TwoOneTwoGames.UIManager.Windows.TutorialPopup
                 clickAction: OkButtonClicked);
         }
 
+        public void PopupResumed()
+        {
+            _popupShownTime = Time.realtimeSinceStartup;
+        }
+        
         private void OkButtonClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "OkButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "OkButton", GetPopupActiveTime());
             _navigationController.GoBack();
             _popupResultAction?.Invoke();
         }
         
         public void BackgroundClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "BackgroundButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "BackgroundButton", GetPopupActiveTime());
             _navigationController.GoBack();
             _popupResultAction?.Invoke();
         }
 
         public void CloseClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "CloseButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "CloseButton", GetPopupActiveTime());
             _navigationController.GoBack();
             _popupResultAction?.Invoke();
+        }
+
+        private float GetPopupActiveTime()
+        {
+            return Time.realtimeSinceStartup - _popupShownTime;
         }
     }
 }

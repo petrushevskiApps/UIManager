@@ -17,5 +17,7 @@ namespace TwoOneTwoGames.UIManager.Windows.TutorialPopup
             string buttonText,
             Color buttonTextColor,
             VideoClip videoClip, Action argsPopupResultAction);
+
+        void PopupResumed();
     }
 }
