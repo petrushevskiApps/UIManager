@@ -7,8 +7,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         public static void BindNavigationControllerDependencies(this DiContainer container)
         {
             container
-                .Bind<INavigationController>()
-                .To<NavigationController>()
+                .BindInterfacesTo<NavigationController>()
                 .AsSingle();
             container
                 .Bind<IScreenProvider>()

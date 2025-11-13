@@ -20,7 +20,8 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         [SerializeField]
         [Tooltip("List of all the Global UI Elements to be shown or hidden when this screen is active")]
         private List<GlobalUiElement> _globalUiElements;
-        
+
+        public string ScreenTitle => gameObject.name;
         public bool IsPopup => false;
         public bool IsBackStackable => _isBackStackable;
         

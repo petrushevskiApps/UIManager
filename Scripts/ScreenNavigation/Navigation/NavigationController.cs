@@ -5,14 +5,18 @@ using Zenject;
 
 namespace TwoOneTwoGames.UIManager.ScreenNavigation
 {
-    public class NavigationController : INavigationController
+    public class NavigationController : 
+        INavigationController,
+        IActiveScreenInfoProvider
     {
+        public string Title => _screenBackStack.Peek().ScreenTitle;
+        
         private readonly IScreenProvider _popupScreenProvider;
 
         private readonly Stack<IScreen> _screenBackStack = new();
 
         private readonly IScreenProvider _screenProvider;
-
+        
         public NavigationController(
             [Inject(Id = "Screen")] IScreenProvider screenProvider,
             [Inject(Id = "PopupScreen")] IScreenProvider popupScreenProvider)

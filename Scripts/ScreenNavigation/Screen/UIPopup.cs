@@ -50,6 +50,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         public event EventHandler PopupScreenHiddenEvent;
         public event EventHandler PopupScreenClosedEvent;
 
+        public string ScreenTitle => gameObject.name;
         public bool IsPopup => true;
         public bool IsBackStackable => _isBackStackable;
 

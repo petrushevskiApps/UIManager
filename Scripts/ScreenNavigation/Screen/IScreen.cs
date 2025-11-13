@@ -7,6 +7,8 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
     /// </summary>
     public interface IScreen : IBackHandler
     {
+        string ScreenTitle { get; }
+        
         bool IsPopup { get; }
 
         /// <summary>
