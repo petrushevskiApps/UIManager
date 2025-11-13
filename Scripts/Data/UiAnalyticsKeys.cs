@@ -5,6 +5,7 @@
         public class PlayerActions
         {
             public const string Click = "click";
+            public const string Toggle = "toggle";
         }
     }
 }
