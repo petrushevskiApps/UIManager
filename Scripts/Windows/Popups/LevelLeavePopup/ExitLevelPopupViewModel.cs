@@ -1,5 +1,6 @@
 ﻿using TwoOneTwoGames.UIManager.Components.Interactive;
 using TwoOneTwoGames.UIManager.Components.NonInteractive.NonInteractive.ViewData;
+using TwoOneTwoGames.UIManager.Data;
 using TwoOneTwoGames.UIManager.Interfaces;
 using TwoOneTwoGames.UIManager.ScreenNavigation;
 using TwoOneTwoGames.UIManager.Utilities.ReactiveProperty;
@@ -18,15 +19,18 @@ namespace TwoOneTwoGames.UIManager.Windows
         private readonly INavigationController _navigationController;
         private readonly IScreenNavigation _screenNavigation;
         private readonly IUILevelController _uiLevelController;
+        private readonly IUiAnalyticsEventsHandler _analyticsEventsHandler;
 
         public ExitLevelPopupViewModel(
             INavigationController navigationController,
             IScreenNavigation screenNavigation,
-            IUILevelController uiLevelController)
+            IUILevelController uiLevelController,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             _navigationController = navigationController;
             _screenNavigation = screenNavigation;
             _uiLevelController = uiLevelController;
+            _analyticsEventsHandler = analyticsEventsHandler;
 
             Title = new ReactiveProperty<string>("Exit Level");
             Message = new ReactiveProperty<string>("Are you sure? \nYour progress will be lost.");
@@ -41,22 +45,26 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         public void BackgroundClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "BackgroundButton");
             _navigationController.GoBack();
         }
 
         public void CloseClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "CloseButton");
             _navigationController.GoBack();
         }
 
         public void ExitLevel()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "YesButton");
             _uiLevelController.LeaveLevel();
             _screenNavigation.ShowMainScreen();
         }
 
         public void DiscardPopupClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "NoButton");
             _navigationController.GoBack();
         }
     }
