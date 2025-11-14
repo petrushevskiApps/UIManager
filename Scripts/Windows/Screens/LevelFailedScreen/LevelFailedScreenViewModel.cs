@@ -27,6 +27,7 @@ namespace TwoOneTwoGames.UIManager.Windows
         private readonly IBackgroundMusicAudioPalette _musicAudioPalette;
         private readonly IPopupNavigation _popupNavigation;
         private readonly IUiSoundSystem _uiSoundSystem;
+        private readonly IUiAnalyticsEventsHandler _analyticsEventsHandler;
 
         public LevelFailedScreenViewModel(
             IScreenNavigation screenNavigation,
@@ -34,7 +35,8 @@ namespace TwoOneTwoGames.UIManager.Windows
             IUILevelController uiLevelController,
             IBackgroundMusicAudioPalette musicAudioPalette,
             IUiAudioPalette uiAudioPalette,
-            IUiSoundSystem uiSoundSystem)
+            IUiSoundSystem uiSoundSystem,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             _screenNavigation = screenNavigation;
             _popupNavigation = popupNavigation;
@@ -42,6 +44,7 @@ namespace TwoOneTwoGames.UIManager.Windows
             _musicAudioPalette = musicAudioPalette;
             _uiAudioPalette = uiAudioPalette;
             _uiSoundSystem = uiSoundSystem;
+            _analyticsEventsHandler = analyticsEventsHandler;
 
             Title = new ReactiveProperty<string>("Level Failed");
             ReviveButton = new ReactiveProperty<UIButtonViewData>(new UIButtonViewData(
@@ -82,21 +85,25 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         protected virtual void HomeButtonClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "HomeButton");
             GoToMainScreen();
         }
 
         protected virtual void ReplayButtonClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "ReplayButton");
             _uiLevelController.RestartLevel();
         }
 
         protected virtual void ReviveButtonClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "ReviveButton");
             _uiLevelController.ReviveAndContinueLevel();
         }
 
         protected void SettingsClicked()
         {
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "SettingsButton");
             _popupNavigation.ShowSettingsPopup();
         }
 
