@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TwoOneTwoGames.UIManager.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -38,16 +39,19 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         protected INavigationController NavigationController;
         protected IPopupNavigation PopupNavigation;
         protected IScreenNavigation ScreenNavigation;
-        
+        private IUiAnalyticsEventsHandler _analyticsEventsHandler;
+
         [Inject]
         private void SetupScreen(
             INavigationController navigationController,
             IScreenNavigation screenNavigation,
-            IPopupNavigation popupNavigation)
+            IPopupNavigation popupNavigation,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             NavigationController = navigationController;
             PopupNavigation = popupNavigation;
             ScreenNavigation = screenNavigation;
+            _analyticsEventsHandler = analyticsEventsHandler;
         }
         
         protected void Awake()
@@ -60,6 +64,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         {
             ScreenShownEvent?.Invoke(this, EventArgs.Empty);
             Resume();
+            _analyticsEventsHandler.SendUiEvent("screen", "Open");
         }
 
         public virtual void Resume()

@@ -43,6 +43,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         private IUiSoundSystem _uiSoundSystem;
         protected INavigationController NavigationController;
         private IPauseGameController _pauseGameController;
+        private IUiAnalyticsEventsHandler _analyticsEventsHandler;
 
         // Events
         public event EventHandler PopupScreenShownEvent;
@@ -59,18 +60,21 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             IUiSoundSystem uiSoundSystem,
             IUiAudioPalette uiAudioPalette,
             INavigationController navigationController, 
-            IPauseGameController pauseGameController)
+            IPauseGameController pauseGameController,
+            IUiAnalyticsEventsHandler analyticsEventsHandler)
         {
             _uiSoundSystem = uiSoundSystem;
             _uiAudioPalette = uiAudioPalette;
             NavigationController = navigationController;
             _pauseGameController = pauseGameController;
+            _analyticsEventsHandler = analyticsEventsHandler;
         }
 
         public virtual void Show<TArguments>(TArguments navArguments)
         {
             PopupScreenShownEvent?.Invoke(this, EventArgs.Empty);
             Resume();
+            _analyticsEventsHandler.SendUiEvent("popup", "Open");
         }
 
         public virtual void Resume()
