@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace TwoOneTwoGames.UIManager.Data
 {
@@ -8,12 +9,15 @@ namespace TwoOneTwoGames.UIManager.Data
     public class UrlConfiguration : ScriptableObject, IUrlConfigurationProvider
     {
         [field: SerializeField]
-        public string PrivacySettingsUrl { get; private set; }
+        public string PrivacySettingsUrl { get; [UsedImplicitly]private set; }
 
         [field: SerializeField]
-        public string PrivacyPolicyUrl { get; private set; }
+        public string PrivacyPolicyUrl { get; [UsedImplicitly]private set; }
 
         [field: SerializeField]
-        public string TermsOfUseUrl { get; private set; }
+        public string TermsOfUseUrl { get; [UsedImplicitly]private set; }
+        
+        [field: SerializeField]
+        public string RateUsUrl { get; [UsedImplicitly]private set; }
     }
 }

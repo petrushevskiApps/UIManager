@@ -78,6 +78,7 @@ namespace TwoOneTwoGames.UIManager.Windows
         protected virtual void RateUsClicked()
         {
             _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "RateUsButton");
+            OpenURL(_urlConfigurationProvider.RateUsUrl);
         }
 
         protected virtual void TermsOfUseClicked()

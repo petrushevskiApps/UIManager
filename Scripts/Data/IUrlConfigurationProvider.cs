@@ -5,5 +5,6 @@
         string PrivacySettingsUrl { get; }
         string PrivacyPolicyUrl { get; }
         string TermsOfUseUrl { get; }
+        string RateUsUrl { get; }
     }
 }
