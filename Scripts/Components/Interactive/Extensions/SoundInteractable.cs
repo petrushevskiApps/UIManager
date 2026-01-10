@@ -17,10 +17,15 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive
         [SerializeField]
         [Tooltip("Override for the default interaction sound. Played when the selectable is interactive.")]
         private AudioClip _positiveSound;
-
+        [SerializeField]
+        private bool _usePositiveSound = true;
+        
         [SerializeField]
         [Tooltip("Override for the default interaction sound. Played when the selectable is not interactive.")]
         private AudioClip _negativeSound;
+        [SerializeField]
+        private bool _useNegativeSound = true;
+
 
         private IUiAudioPalette _uiAudioPalette;
 
@@ -45,11 +50,19 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive
 
         private AudioClip GetPositiveSound()
         {
+            if (!_usePositiveSound)
+            {
+                return null;
+            }
             return _positiveSound != null ? _positiveSound : _uiAudioPalette.ActiveInteractableElementClicked;
         }
 
         private AudioClip GetNegativeSound()
         {
+            if (!_useNegativeSound)
+            {
+                return null;
+            }
             return _negativeSound != null ? _negativeSound : _uiAudioPalette.InactiveInteractableElementClicked;
         }
     }
