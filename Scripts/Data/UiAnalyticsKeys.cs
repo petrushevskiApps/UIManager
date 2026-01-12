@@ -6,6 +6,7 @@
         {
             public const string Click = "click";
             public const string Toggle = "toggle";
+            public static string Open = "open";
         }
     }
 }

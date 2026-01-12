@@ -74,7 +74,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         {
             PopupScreenShownEvent?.Invoke(this, EventArgs.Empty);
             Resume();
-            _analyticsEventsHandler.SendUiEvent("popup", "Open");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Open, $"Popup:{gameObject.name}");
         }
 
         public virtual void Resume()

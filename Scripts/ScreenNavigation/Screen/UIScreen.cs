@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TwoOneTwoGames.UIManager.Data;
 using TwoOneTwoGames.UIManager.Interfaces;
 using UnityEngine;
 using Zenject;
@@ -64,7 +65,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         {
             ScreenShownEvent?.Invoke(this, EventArgs.Empty);
             Resume();
-            _analyticsEventsHandler.SendUiEvent("screen", "Open");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Open, $"Screen {gameObject.name}");
         }
 
         public virtual void Resume()
