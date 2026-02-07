@@ -73,15 +73,15 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive.LevelsList
             _viewModel.LoadNextPage();
         }
 
-        public void SetItemViewData(IItemView rowView)
+        public void SetItemViewData(IItemView itemView)
         {
-            var row = rowView.View.GetComponent<ListRowView>();
+            var row = itemView.View.GetComponent<ListRowView>();
 
             row.SetData(
                 _uiHapticsController,
                 _viewModel.OnLevelClicked,
                 !_funnelPresenter.IsLockedFunnel(),
-                _viewModel.Levels.SafeGetRange(rowView.Index * _columnCount, _columnCount).ToArray());
+                _viewModel.Levels.SafeGetRange(itemView.Index * _columnCount, _columnCount).ToArray());
         }
         
         private void OnListEndEvent(object sender, EventArgs e)
@@ -93,7 +93,7 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive.LevelsList
         {
             _infiniteScrollController.AddPageAndScrollTo(
                 Mathf.CeilToInt((float) args.ElementsInPage / _columnCount),
-                (Mathf.Clamp(args.IndexOfLastCompletedLevel - 1, 0, int.MaxValue)) / _columnCount);
+                (Mathf.Clamp(args.ScrollToElementIndex - 1, 0, int.MaxValue)) / _columnCount);
         }
     }
 }

@@ -6,11 +6,11 @@ namespace TwoOneTwoGames.UIManager.Windows
     {
         public int ElementsInPage { get; }
 
-        public int IndexOfLastCompletedLevel { get; }
+        public int ScrollToElementIndex { get; }
 
-        public PageLoadedEventArguments(int indexOfLastCompletedLevel, int elementsInPage)
+        public PageLoadedEventArguments(int scrollToElementIndex, int elementsInPage)
         {
-            IndexOfLastCompletedLevel = indexOfLastCompletedLevel;
+            ScrollToElementIndex = scrollToElementIndex;
             ElementsInPage = elementsInPage;
         }
     }

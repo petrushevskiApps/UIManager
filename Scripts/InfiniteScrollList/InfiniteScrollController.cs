@@ -117,12 +117,12 @@ namespace TwoOneTwoGames.UIManager.InfiniteScrollList
         private void SetPrefabAnchors()
         {
             var rectTransform = _listItemPrefab.GetComponent<RectTransform>();
-            // rectTransform.anchorMin = new Vector2(0, 1);
-            // rectTransform.anchorMax = new Vector2(1, 1);
-            // rectTransform.pivot = new Vector2(0, 0.5f);
-            rectTransform.anchorMin = new Vector2(0.5f, 1);
-            rectTransform.anchorMax = new Vector2(0.5f, 1);
-            rectTransform.pivot = new Vector2(0.5f, 0.5f);
+            rectTransform.anchorMin = new Vector2(0, 1);
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.pivot = new Vector2(0, 0.5f);
+            // rectTransform.anchorMin = new Vector2(0.5f, 1);
+            // rectTransform.anchorMax = new Vector2(0.5f, 1);
+            // rectTransform.pivot = new Vector2(0.5f, 0.5f);
         }
 
         public void Clear()
