@@ -37,20 +37,50 @@ namespace TwoOneTwoGames.UIManager.Windows
         public override void Resume()
         {
             base.Resume();
-            
-            _viewModel.RestartButton.Subscribe(_restartButton.SetData);
-            _viewModel.HomeButton.Subscribe(_homeButton.SetData);
-            _viewModel.PlayButton.Subscribe(_playButton.SetData);
-            _viewModel.SettingsButton.Subscribe(_settingsButton.SetData);
+
+            if (_restartButton != null)
+            {
+                _viewModel.RestartButton.Subscribe(_restartButton.SetData);
+            }
+
+            if (_homeButton != null)
+            {
+                _viewModel.HomeButton.Subscribe(_homeButton.SetData);
+            }
+
+            if (_playButton != null)
+            {
+                _viewModel.PlayButton.Subscribe(_playButton.SetData);
+            }
+
+            if (_settingsButton != null)
+            {
+                _viewModel.SettingsButton.Subscribe(_settingsButton.SetData);
+            }
         }
 
         public override void Hide()
         {
             base.Hide();
-            _viewModel.RestartButton.Unsubscribe(_restartButton.SetData);
-            _viewModel.HomeButton.Unsubscribe(_homeButton.SetData);
-            _viewModel.PlayButton.Unsubscribe(_playButton.SetData);
-            _viewModel.SettingsButton.Unsubscribe(_settingsButton.SetData);
+            if (_restartButton != null)
+            {
+                _viewModel.RestartButton.Unsubscribe(_restartButton.SetData);
+            }
+
+            if (_homeButton != null)
+            {
+                _viewModel.HomeButton.Unsubscribe(_homeButton.SetData);
+            }
+
+            if (_playButton != null)
+            {
+                _viewModel.PlayButton.Unsubscribe(_playButton.SetData);
+            }
+
+            if (_settingsButton != null)
+            {
+                _viewModel.SettingsButton.Unsubscribe(_settingsButton.SetData);
+            }
         }
     }
 }
