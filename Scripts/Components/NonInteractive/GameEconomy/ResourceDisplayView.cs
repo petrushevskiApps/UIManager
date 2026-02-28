@@ -3,6 +3,7 @@ using System.Globalization;
 using TMPro;
 using TwoOneTwoGames.UIManager.Data.IconPalette;
 using TwoOneTwoGames.UIManager.Interfaces;
+using TwoOneTwoGames.UIManager.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -58,7 +59,7 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive.GameEconomy
 
         private void SetValue(float value)
         {
-            _resourceValueText.text = value.ToString(CultureInfo.InvariantCulture);
+            _resourceValueText.text = NumberFormatter.FormatWithSuffix(value, true, SuffixThreshold.Million);
         }
 
         private void SetIcon(int rewardId)
