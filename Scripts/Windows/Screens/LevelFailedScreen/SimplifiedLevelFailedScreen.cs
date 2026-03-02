@@ -27,7 +27,7 @@ namespace TwoOneTwoGames.UIManager.Windows
         
         public override void Resume()
         {
-            Resume();
+            base.Resume();
             if (!_isSfxPlayed)
             {
                 _uiSoundSystem.PlayUiSoundEffect(_uiAudioPalette.LevelFailedBackgroundMusic);
@@ -38,13 +38,13 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         public override void Hide()
         {
-            Hide();
+            base.Hide();
             _uiSoundSystem.StopBackgroundMusic();
         }
 
         public override void Close()
         {
-            Close();
+            base.Close();
             _isSfxPlayed = false;
         }
     }
