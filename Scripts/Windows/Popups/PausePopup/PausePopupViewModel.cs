@@ -52,37 +52,35 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         protected virtual void RestartClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "RestartButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Pause:RestartButton");
             _uiLevelController.RestartLevel();
         }
 
         protected virtual void HomeClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "HomeButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Pause:HomeButton");
             _popupNavigation.ShowExitLevelPopup();
         }
 
         protected virtual void PlayClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "ResumeButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Pause:ResumeButton");
             _navigationController.GoBack();
         }
 
         protected virtual void SettingsClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "SettingsButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Pause:SettingsButton");
             _popupNavigation.ShowSettingsPopup();
         }
 
         public void BackgroundClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "BackgroundButton");
             _navigationController.GoBack();
         }
 
         public void CloseClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "CloseButton");
             _navigationController.GoBack();
         }
     }

@@ -60,7 +60,6 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
         {
             base.Resume();
 
-            _viewModel.PopupResumed();
             _buyEchoesButton.OnClick += Close;
             _rewardedAdButton.OnClick += Close;
             

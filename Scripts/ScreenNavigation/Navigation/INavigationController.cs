@@ -26,5 +26,6 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         event EventHandler AllScreensClosedEvent;
         IBackHandler GetActiveBackHandler();
         void ClearAllStackScreens();
+        float GetActiveScreenTime();
     }
 }

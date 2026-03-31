@@ -51,5 +51,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         ///     </remarks>
         /// </summary>
         void Close();
+
+        float GetScreenActiveTime();
     }
 }

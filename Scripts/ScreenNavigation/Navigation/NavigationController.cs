@@ -72,7 +72,15 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         public void ClearAllStackScreens()
         {
-            while (!_screenBackStack.IsEmpty()) _screenBackStack.Pop().Close();
+            while (!_screenBackStack.IsEmpty())
+            {
+                _screenBackStack.Pop().Close();
+            }
+        }
+
+        public float GetActiveScreenTime()
+        {
+            return _screenBackStack.Peek().GetScreenActiveTime();
         }
 
         private void Show<T, TArguments>(

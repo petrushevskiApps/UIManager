@@ -35,6 +35,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         // Internal
         private RectTransform _screenRect;
+        private float _popupShownTime;
 
         // Injected
         protected INavigationController NavigationController;
@@ -65,11 +66,14 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         {
             ScreenShownEvent?.Invoke(this, EventArgs.Empty);
             Resume();
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Open, $"Screen {gameObject.name}");
+            _analyticsEventsHandler.SendUiEvent(
+                UiAnalyticsKeys.PlayerActions.Open, 
+                $"Screen:{gameObject.name}");
         }
 
         public virtual void Resume()
         {
+            _popupShownTime = Time.realtimeSinceStartup;
             ScreenResumedEvent?.Invoke(this, EventArgs.Empty);
             gameObject.SetActive(true);
             ToggleGlobalUIElementsState(true);
@@ -86,6 +90,11 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         {
             ScreenClosedEvent?.Invoke(this, EventArgs.Empty);
             Hide();
+        }
+
+        public float GetScreenActiveTime()
+        {
+            return Time.realtimeSinceStartup - _popupShownTime;
         }
 
         public virtual void OnBackTriggered()

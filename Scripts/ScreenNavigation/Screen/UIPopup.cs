@@ -38,7 +38,9 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         private TextMeshProUGUI _message;
 
         private IUiAudioPalette _uiAudioPalette;
-
+        private ClosingAction _closingAction;
+        private float _popupShownTime;
+        
         // Injected
         private IUiSoundSystem _uiSoundSystem;
         protected INavigationController NavigationController;
@@ -79,17 +81,21 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         public virtual void Resume()
         {
+            _popupShownTime = Time.realtimeSinceStartup;
             PopupScreenResumedEvent?.Invoke(this, EventArgs.Empty);
-            _popupClickableBackground.OnClick += GetPopupViewModel().BackgroundClicked;
+            if (_popupClickableBackground != null)
+            {
+                _popupClickableBackground.OnClick += BackgroundClicked;
+            }
             if (_closeButton != null)
             {
-                _closeButton.OnClick += GetPopupViewModel().CloseClicked;
+                _closeButton.OnClick += CloseClicked;
             }
+            
             if (_title != null)
             {
                 GetPopupViewModel().Title?.Subscribe(SetTitle, true);
             }
-
             if (_message != null)
             {
                 GetPopupViewModel().Message?.Subscribe(SetMessage, true);
@@ -122,10 +128,13 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         private void HideInternal(bool hideObject)
         {
             PopupScreenHiddenEvent?.Invoke(this, EventArgs.Empty);
-            _popupClickableBackground.OnClick -= GetPopupViewModel().BackgroundClicked;
+            if (_popupClickableBackground != null)
+            {
+                _popupClickableBackground.OnClick -= BackgroundClicked;
+            }
             if (_closeButton != null)
             {
-                _closeButton.OnClick -= GetPopupViewModel().CloseClicked;
+                _closeButton.OnClick -= CloseClicked;
             }
             if (hideObject)
             {
@@ -142,23 +151,44 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             }
             PauseGame(false);
         }
+        
         public virtual void Close()
         {
             PopupScreenClosedEvent?.Invoke(this, EventArgs.Empty);
             PlaySfx(_uiAudioPalette.PopupHidden);
             Hide();
+            _analyticsEventsHandler.SendUiEvent(
+                UiAnalyticsKeys.PlayerActions.Close, 
+                $"Popup:{gameObject.name}:{_closingAction}",
+                GetScreenActiveTime());
+            _closingAction = default;
         }
 
         public void OnBackTriggered()
         {
+            _closingAction = ClosingAction.Back;
             NavigationController.GoBack();
         }
 
+        private void BackgroundClicked()
+        {
+            _closingAction = ClosingAction.BackgroundButton;
+            GetPopupViewModel().BackgroundClicked();
+        }
+
+        private void CloseClicked()
+        {
+            _closingAction = ClosingAction.Close;
+            GetPopupViewModel().CloseClicked();
+        }
         protected abstract IPopupViewModel GetPopupViewModel();
 
         private void PlaySfx(AudioClip sfxClip)
         {
-            if (sfxClip != null) _uiSoundSystem?.PlayUiSoundEffect(sfxClip);
+            if (sfxClip != null)
+            {
+                _uiSoundSystem?.PlayUiSoundEffect(sfxClip);
+            }
         }
 
         private void SetTitle(string title)
@@ -191,6 +221,20 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
             {
                 _pauseGameController.TogglePauseGame(pause);
             }
+        }
+        
+        
+        public float GetScreenActiveTime()
+        {
+            return Time.realtimeSinceStartup - _popupShownTime;
+        }
+        
+        private enum ClosingAction
+        {
+            Custom,
+            Back,
+            Close,
+            BackgroundButton
         }
     }
 }

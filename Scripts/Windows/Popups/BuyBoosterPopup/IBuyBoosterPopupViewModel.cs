@@ -11,7 +11,6 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
         IReactiveProperty<ImageViewData> Icon { get; }
         IReactiveProperty<UIButtonViewData> BuyButtonViewData { get; }
         IReactiveProperty<UIButtonViewData> RewardedAdButtonViewData { get; }
-        void PopupResumed();
 
         void Setup(string title,
             string message,

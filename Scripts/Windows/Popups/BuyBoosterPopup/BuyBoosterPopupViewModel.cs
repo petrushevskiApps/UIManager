@@ -24,7 +24,6 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
         private Action _onSuccessfulBuy;
         private int _resourceId;
         private int _resourceAmountRequired;
-        private float _popupShownTime;
 
         // Injected
         private readonly IUiGameEconomyPresenter _economyPresenter;
@@ -94,17 +93,12 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
                 clickAction: OnRewardedAdClicked);
         }
 
-        public void PopupResumed()
-        {
-            _popupShownTime = Time.realtimeSinceStartup;
-        }
-        
         private void OnRewardedAdClicked()
         {
             _analyticsEventsHandler.SendUiEvent(
                 UiAnalyticsKeys.PlayerActions.Click, 
                 "RewardedAdButton", 
-                GetPopupActiveTime());
+                _navigationController.GetActiveScreenTime());
             _onSuccessfulBuy?.Invoke();
             _navigationController.GoBack();
         }
@@ -114,7 +108,7 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
             _analyticsEventsHandler.SendUiEvent(
                 UiAnalyticsKeys.PlayerActions.Click, 
                 "BuyButton", 
-                GetPopupActiveTime());
+                _navigationController.GetActiveScreenTime());
             _economyController.UseCurrency(_resourceId, _resourceAmountRequired);
             _onSuccessfulBuy?.Invoke();
             _navigationController.GoBack();
@@ -128,19 +122,11 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
 
         public void BackgroundClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(
-                UiAnalyticsKeys.PlayerActions.Click, 
-                "BackgroundButton", 
-                GetPopupActiveTime());
             Close();
         }
 
         public void CloseClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(
-                UiAnalyticsKeys.PlayerActions.Click, 
-                "CloseButton", 
-                GetPopupActiveTime());
             Close();
         }
 
@@ -148,11 +134,6 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
         {
             _discardAction?.Invoke();
             _navigationController.GoBack();
-        }
-        
-        private float GetPopupActiveTime()
-        {
-            return Time.realtimeSinceStartup - _popupShownTime;
         }
     }
 }

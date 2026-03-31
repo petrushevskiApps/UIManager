@@ -77,37 +77,35 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         protected virtual void RateUsClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "RateUsButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Settings:RateUsButton");
             OpenURL(_urlConfigurationProvider.RateUsUrl);
         }
 
         protected virtual void TermsOfUseClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "TermsOfUseButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Settings:TermsOfUseButton");
             OpenURL(_urlConfigurationProvider.TermsOfUseUrl);
         }
 
         protected virtual void PrivacyPolicyClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "PrivacyPolicyButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Settings:PrivacyPolicyButton");
             OpenURL(_urlConfigurationProvider.PrivacyPolicyUrl);
         }
 
         protected virtual void PrivacySettingsClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "PrivacySettingsButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Settings:PrivacySettingsButton");
             OpenURL(_urlConfigurationProvider.PrivacySettingsUrl);
         }
 
         public void BackgroundClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "BackgroundButton");
             _navigationController.GoBack();
         }
 
         public void CloseClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "CloseButton");
             _navigationController.GoBack();
         }
 
