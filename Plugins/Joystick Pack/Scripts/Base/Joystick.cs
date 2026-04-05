@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,7 +9,7 @@ namespace TwoOneTwoGames.UIManager.Plugins.JoystickPlugin
 {
     public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IJoystick
     {
-        public UnityEvent<bool> OnJoystickState = new UnityEvent<bool>();
+        public event Action<bool> OnJoystickState;
     
         public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
         public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
@@ -64,7 +65,7 @@ namespace TwoOneTwoGames.UIManager.Plugins.JoystickPlugin
 
         public virtual void OnPointerDown(PointerEventData eventData)
         {
-            OnJoystickState.Invoke(true);
+            OnJoystickState?.Invoke(true);
             OnDrag(eventData);
         }
 
@@ -137,7 +138,7 @@ namespace TwoOneTwoGames.UIManager.Plugins.JoystickPlugin
 
         public virtual void OnPointerUp(PointerEventData eventData)
         {
-            OnJoystickState.Invoke(false);
+            OnJoystickState?.Invoke(false);
             Reset();
         }
 
