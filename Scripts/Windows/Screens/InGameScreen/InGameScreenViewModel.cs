@@ -48,7 +48,7 @@ namespace TwoOneTwoGames.UIManager.Windows
             _uiLevelController.LevelStartedEvent -= OnLevelStarted;
         }
 
-        private void OnLevelStarted(object sender, string levelTitle)
+        private void OnLevelStarted(string levelTitle)
         {
             LevelTitle.Value = $"Level {levelTitle}";
         }

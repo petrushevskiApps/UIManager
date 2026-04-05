@@ -90,7 +90,7 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         private void OnButtonClicked()
         {
-            _onItemClicked?.Invoke(_levelData.FunnelId, _levelData.Id);
+            _onItemClicked?.Invoke(_levelData.WorldId, _levelData.Id);
         }
     }
 }

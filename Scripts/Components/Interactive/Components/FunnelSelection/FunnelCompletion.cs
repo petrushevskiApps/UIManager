@@ -50,7 +50,7 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive.FunnelSelection
 
         private void SetData()
         {
-            _text.SetData($"{_funnelPresenter.GetIndexOfLastCompletedLevel() + 1} / {_funnelPresenter.GetLevelsCount()}");
+            _text.SetData($"{_funnelPresenter.GetCompletedLevelsCount()} / {_funnelPresenter.GetLevelsCount()}");
         }
     }
 }

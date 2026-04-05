@@ -35,7 +35,7 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive.GameEconomy
         private void OnEnable()
         {
             _gameEconomyPresenter.UsedResourceEvent += OnResourceUsed;
-            SetResource();
+            SetResource(_gameEconomyPresenter.GetResourceValueWithId(_resourceId));
         }
 
         private void OnDisable()
@@ -43,17 +43,17 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive.GameEconomy
             _gameEconomyPresenter.UsedResourceEvent -= OnResourceUsed;
         }
 
-        private void OnResourceUsed(object sender, (int id, float value) resource)
+        private void OnResourceUsed(int resourceId, long resourceValue)
         {
-            if (_resourceId == resource.id)
+            if (_resourceId == resourceId)
             {
-                SetResource();
+                SetResource(resourceValue);
             }
         }
 
-        private void SetResource()
+        private void SetResource(long resourceValue)
         {
-            SetValue(_gameEconomyPresenter.GetResourceValueWithId(_resourceId));
+            SetValue(resourceValue);
             SetIcon(_resourceId);
         }
 

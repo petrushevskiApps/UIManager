@@ -4,8 +4,8 @@ namespace TwoOneTwoGames.UIManager.Interfaces
 {
     public interface IUiGameEconomyPresenter
     {
-        event EventHandler<(int, float)> EarnedResourceEvent;
-        event EventHandler<(int, float)> UsedResourceEvent;
-        int GetResourceValueWithId(int id);
+        event Action<int, long> EarnedResourceEvent;
+        event Action<int, long> UsedResourceEvent;
+        long GetResourceValueWithId(int id);
     }
 }

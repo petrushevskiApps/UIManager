@@ -114,9 +114,9 @@ namespace TwoOneTwoGames.UIManager.Windows.Popups
             _navigationController.GoBack();
         }
 
-        private bool IsBuyWithResourceAvailable(int resourceId, int resourceAmount)
+        private bool IsBuyWithResourceAvailable(int resourceId, long resourceAmount)
         {
-            int availableResources = _economyPresenter.GetResourceValueWithId(resourceId);
+            long availableResources = _economyPresenter.GetResourceValueWithId(resourceId);
             return availableResources >= resourceAmount;
         }
 

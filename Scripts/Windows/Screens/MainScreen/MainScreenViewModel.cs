@@ -55,7 +55,7 @@ namespace TwoOneTwoGames.UIManager.Windows
             _uiLevelController.LevelReadyEvent -= OnLevelReady;
         }
         
-        private void OnLevelReady(object sender, string levelTitle)
+        private void OnLevelReady(string levelTitle)
         {
             PlayButton.Value = new UIButtonViewData(
                 label: new TextViewData(true, $"Play Level {levelTitle}"),

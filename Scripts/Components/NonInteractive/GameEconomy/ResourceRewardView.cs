@@ -36,15 +36,15 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive.GameEconomy
             _gameEconomyPresenter.EarnedResourceEvent -= OnEarnedReward;
         }
 
-        private void OnEarnedReward(object sender, (int id, float value) resource)
+        private void OnEarnedReward(int resourceId, long resourceValue)
         {
-            if (_resourceId != resource.id)
+            if (_resourceId != resourceId)
             {
                 return;
             }
             gameObject.SetActive(true);
-            SetValue(resource.value);
-            SetIcon(resource.id);
+            SetValue(resourceValue);
+            SetIcon(resourceId);
         }
 
         private void SetValue(float value)

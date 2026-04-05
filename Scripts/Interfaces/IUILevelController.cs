@@ -4,7 +4,8 @@ namespace TwoOneTwoGames.UIManager.Interfaces
 {
     public interface IUILevelController
     {
-        event EventHandler<string> LevelReadyEvent;
+        event Action<string> LevelReadyEvent;
+        event Action<string> LevelStartedEvent;
         void StartLevel(int funnelId, int levelId);
         void StartLevel();
         void RestartLevel();
@@ -14,6 +15,5 @@ namespace TwoOneTwoGames.UIManager.Interfaces
         void LeaveLevel();
         void StartNextLevel();
         void SetLastUnlockedLevel();
-        event EventHandler<string> LevelStartedEvent;
     }
 }
