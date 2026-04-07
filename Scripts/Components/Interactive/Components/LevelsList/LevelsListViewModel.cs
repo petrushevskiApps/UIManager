@@ -67,7 +67,7 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive.LevelsList
 
         public void OnLevelClicked(int funnelId, int levelId)
         {
-            _levelController.StartLevel(funnelId, levelId);
+            _levelController.LevelSelected(funnelId, levelId);
         }
 
         private int GetIndexOfLevelToScroll()

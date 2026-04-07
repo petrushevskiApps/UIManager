@@ -57,7 +57,6 @@ namespace TwoOneTwoGames.UIManager.Windows
         {
             _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:ExitLevel:Yes");
             _uiLevelController.LeaveLevel();
-            _screenNavigation.ShowMainScreen();
         }
 
         public void DiscardPopupClicked()

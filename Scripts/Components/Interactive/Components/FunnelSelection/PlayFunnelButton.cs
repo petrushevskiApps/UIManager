@@ -63,7 +63,7 @@ namespace TwoOneTwoGames.UIManager.Components.Interactive.FunnelSelection
 
         private void OnButtonClicked()
         {
-            _uiLevelController.StartLevel();
+            _uiLevelController.StartLastUnlockedLevel();
         }
     }
 }

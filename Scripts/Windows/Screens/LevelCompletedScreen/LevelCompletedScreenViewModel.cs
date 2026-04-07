@@ -104,7 +104,7 @@ namespace TwoOneTwoGames.UIManager.Windows
         public virtual void SetEarnedStars(int earnedStars)
         {
             EarnedStars.Value = earnedStars;
-            _uiLevelController.CollectReward(EarnedStars.Value);
+            _uiLevelController.CollectLevelReward();
         }
 
         protected virtual void NextLevelButtonClicked()
@@ -114,7 +114,7 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         protected virtual void DoubleRewardButtonClicked()
         {
-            _uiLevelController.CollectReward(EarnedStars.Value);
+            _uiLevelController.CollectLevelReward();
             _uiLevelController.StartNextLevel();
         }
 

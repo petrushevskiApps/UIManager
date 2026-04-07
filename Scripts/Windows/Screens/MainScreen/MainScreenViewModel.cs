@@ -48,7 +48,6 @@ namespace TwoOneTwoGames.UIManager.Windows
             _uiLevelController.LevelReadyEvent += OnLevelReady;
             
             _uiSoundSystem.PlayBackgroundMusic(_musicAudioPalette.MainScreenBackgroundMusic);
-            _uiLevelController.SetLastUnlockedLevel();
         }
         public void ScreenHidden()
         {
@@ -74,7 +73,7 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         protected virtual void StartLevelClicked()
         {
-            _uiLevelController.StartLevel();
+            _uiLevelController.StartLastUnlockedLevel();
         }
     }
 }

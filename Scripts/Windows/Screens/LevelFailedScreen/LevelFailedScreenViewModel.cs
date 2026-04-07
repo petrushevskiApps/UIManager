@@ -118,7 +118,6 @@ namespace TwoOneTwoGames.UIManager.Windows
         private void GoToMainScreen()
         {
             _uiLevelController.LeaveLevel();
-            _screenNavigation.ShowMainScreen();
         }
     }
 }
