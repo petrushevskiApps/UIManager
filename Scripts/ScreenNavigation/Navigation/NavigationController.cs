@@ -9,8 +9,6 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         INavigationController,
         IActiveScreenInfoProvider
     {
-        public string Title => _screenBackStack.Peek().ScreenTitle;
-        
         private readonly IScreenProvider _popupScreenProvider;
 
         private readonly Stack<IScreen> _screenBackStack = new();
@@ -155,6 +153,18 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
                 if (!stack.Peek().Equals(screen))
                     stack.Pop().Close();
                 else break;
+        }
+
+        public string GetTitle()
+        {
+            try
+            {
+                return _screenBackStack.Peek().ScreenTitle;
+            }
+            catch (Exception)
+            {
+                return String.Empty;
+            }
         }
     }
 }
