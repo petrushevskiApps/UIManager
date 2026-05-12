@@ -154,19 +154,19 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         
         public virtual void Close()
         {
-            PopupScreenClosedEvent?.Invoke(this, EventArgs.Empty);
-            PlaySfx(_uiAudioPalette.PopupHidden);
-            Hide();
             _analyticsEventsHandler.SendUiEvent(
                 UiAnalyticsKeys.PlayerActions.Close, 
                 $"Popup:{gameObject.name}:{_closingAction}",
                 GetScreenActiveTime());
+            PopupScreenClosedEvent?.Invoke(this, EventArgs.Empty);
+            PlaySfx(_uiAudioPalette.PopupHidden);
+            Hide();
             _closingAction = default;
         }
 
         public void OnBackTriggered()
         {
-            _closingAction = ClosingAction.Back;
+            _closingAction = ClosingAction.BackButton;
             NavigationController.GoBack();
         }
 
@@ -178,7 +178,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         private void CloseClicked()
         {
-            _closingAction = ClosingAction.Close;
+            _closingAction = ClosingAction.CloseButton;
             GetPopupViewModel().CloseClicked();
         }
         protected abstract IPopupViewModel GetPopupViewModel();
@@ -232,8 +232,8 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
         private enum ClosingAction
         {
             Custom,
-            Back,
-            Close,
+            BackButton,
+            CloseButton,
             BackgroundButton
         }
     }

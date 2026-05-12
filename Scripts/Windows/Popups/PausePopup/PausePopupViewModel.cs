@@ -52,25 +52,25 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         protected virtual void RestartClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Pause:RestartButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "RestartButton");
             _uiLevelController.RestartLevel();
         }
 
         protected virtual void HomeClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Pause:HomeButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "HomeButton");
             _popupNavigation.ShowExitLevelPopup();
         }
 
         protected virtual void PlayClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Pause:ResumeButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "ResumeButton");
             _navigationController.GoBack();
         }
 
         protected virtual void SettingsClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Pause:SettingsButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "SettingsButton");
             _popupNavigation.ShowSettingsPopup();
         }
 

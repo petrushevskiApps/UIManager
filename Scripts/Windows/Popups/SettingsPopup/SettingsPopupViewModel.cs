@@ -77,25 +77,25 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         protected virtual void RateUsClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Settings:RateUsButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "RateUsButton");
             OpenURL(_urlConfigurationProvider.RateUsUrl);
         }
 
         protected virtual void TermsOfUseClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Settings:TermsOfUseButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "TermsOfUseButton");
             OpenURL(_urlConfigurationProvider.TermsOfUseUrl);
         }
 
         protected virtual void PrivacyPolicyClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Settings:PrivacyPolicyButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "PrivacyPolicyButton");
             OpenURL(_urlConfigurationProvider.PrivacyPolicyUrl);
         }
 
         protected virtual void PrivacySettingsClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:Settings:PrivacySettingsButton");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "PrivacySettingsButton");
             OpenURL(_urlConfigurationProvider.PrivacySettingsUrl);
         }
 
@@ -145,7 +145,7 @@ namespace TwoOneTwoGames.UIManager.Windows
             string state = newState
                 ? "ON"
                 : "OFF";
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Toggle, $"soundEffects_{state}");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Toggle, $"SoundEffects_{state}");
         }
 
         protected virtual void MusicToggleClicked()
@@ -159,7 +159,7 @@ namespace TwoOneTwoGames.UIManager.Windows
             string state = newState
                 ? "ON"
                 : "OFF";
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Toggle, $"music_{state}");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Toggle, $"Music_{state}");
         }
 
         protected virtual void VibrationToggleClicked()
@@ -173,7 +173,7 @@ namespace TwoOneTwoGames.UIManager.Windows
             string state = newState
                 ? "ON"
                 : "OFF";
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Toggle, $"vibrations_{state}");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Toggle, $"Vibrations_{state}");
         }
 
         private void OpenURL(string url)

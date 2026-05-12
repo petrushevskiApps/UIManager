@@ -4,10 +4,10 @@
     {
         public class PlayerActions
         {
-            public const string Click = "click";
-            public const string Toggle = "toggle";
-            public static string Open = "open";
-            public static string Close = "close";
+            public const string Click = "Click";
+            public const string Toggle = "Toggle";
+            public static string Open = "Open";
+            public static string Close = "Close";
         }
     }
 }

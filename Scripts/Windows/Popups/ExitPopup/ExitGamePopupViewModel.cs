@@ -49,13 +49,13 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         private void DiscardPopupClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, $"Popup:ExitGame:No");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, $"NoButton");
             _navigationController.GoBack();
         }
 
         private void ExitApp()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:ExitGame:Yes");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "YesButton");
             _exitAppController.ExitApp();
         }
     }

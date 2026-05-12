@@ -55,13 +55,13 @@ namespace TwoOneTwoGames.UIManager.Windows
 
         public void ExitLevel()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:ExitLevel:Yes");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "YesButton");
             _uiLevelController.LeaveLevel();
         }
 
         public void DiscardPopupClicked()
         {
-            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "Popup:ExitLevel:No");
+            _analyticsEventsHandler.SendUiEvent(UiAnalyticsKeys.PlayerActions.Click, "NoButton");
             _navigationController.GoBack();
         }
     }
