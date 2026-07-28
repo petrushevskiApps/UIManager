@@ -51,7 +51,13 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
 
         private void UpdateText()
         {
-            if (_text != null) _text.text = $"{_slider.value} / {_slider.maxValue}";
+            if (_text == null) return;
+
+            // Slider range can be zero-width, which would make the percentage undefined
+            var range = _slider.maxValue - _slider.minValue;
+            var percentage = range > 0f ? (_slider.value - _slider.minValue) / range * 100f : 0f;
+
+            _text.text = $"{Mathf.RoundToInt(percentage)}%";
         }
     }
 }
