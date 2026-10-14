@@ -18,10 +18,8 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
 
         private Slider _slider;
 
-        private void Awake()
-        {
-            _slider = GetComponent<Slider>();
-        }
+        // SetData can arrive before Awake when a parent is still inactive, so the slider is fetched on demand
+        private Slider Slider => _slider ??= GetComponent<Slider>();
 
         public void SetData(UIProgressBarData progressBarData)
         {
@@ -31,8 +29,8 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
                 return;
             }
             gameObject.SetActive(true);
-            _slider.minValue = progressBarData.Minimum;
-            _slider.maxValue = progressBarData.Maximum;
+            Slider.minValue = progressBarData.Minimum;
+            Slider.maxValue = progressBarData.Maximum;
             UpdateProgress(progressBarData.Current);
 
             if (progressBarData.Color.HasValue) SetColor(progressBarData.Color.Value);
@@ -40,7 +38,7 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
 
         private void UpdateProgress(float currentProgress)
         {
-            _slider.value = currentProgress;
+            Slider.value = currentProgress;
             UpdateText();
         }
 
@@ -54,8 +52,8 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
             if (_text == null) return;
 
             // Slider range can be zero-width, which would make the percentage undefined
-            var range = _slider.maxValue - _slider.minValue;
-            var percentage = range > 0f ? (_slider.value - _slider.minValue) / range * 100f : 0f;
+            var range = Slider.maxValue - Slider.minValue;
+            var percentage = range > 0f ? (Slider.value - Slider.minValue) / range * 100f : 0f;
 
             _text.text = $"{Mathf.RoundToInt(percentage)}%";
         }
