@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 namespace TwoOneTwoGames.UIManager.Components.NonInteractive
 {
-    [RequireComponent(typeof(Slider))]
     public class UIProgressBar : MonoBehaviour
     {
+        [Tooltip("A Filled image. Its fill method and origin set the bar's direction.")]
         [SerializeField]
         private Image _fillImage;
 
@@ -26,14 +26,6 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
 
         private bool _outlineApplied;
 
-        private float _currentProgress;
-        private float _maxProgress;
-
-        private Slider _slider;
-
-        // SetData can arrive before Awake when a parent is still inactive, so the slider is fetched on demand
-        private Slider Slider => _slider ??= GetComponent<Slider>();
-
         public void SetData(UIProgressBarData progressBarData)
         {
             if (!progressBarData.IsVisible)
@@ -42,17 +34,19 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
                 return;
             }
             gameObject.SetActive(true);
-            Slider.minValue = progressBarData.Minimum;
-            Slider.maxValue = progressBarData.Maximum;
-            UpdateProgress(progressBarData.Current);
+            UpdateProgress(progressBarData.Minimum, progressBarData.Maximum, progressBarData.Current);
 
             if (progressBarData.Color.HasValue) SetColor(progressBarData.Color.Value);
         }
 
-        private void UpdateProgress(float currentProgress)
+        private void UpdateProgress(float minimum, float maximum, float current)
         {
-            Slider.value = currentProgress;
-            UpdateText();
+            // Range can be zero-width, which would make the fraction undefined
+            var range = maximum - minimum;
+            var fraction = range > 0f ? Mathf.Clamp01((current - minimum) / range) : 0f;
+
+            _fillImage.fillAmount = fraction;
+            UpdateText(fraction);
         }
 
         private void SetColor(Color color)
@@ -60,17 +54,13 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
             _fillImage.color = color;
         }
 
-        private void UpdateText()
+        private void UpdateText(float fraction)
         {
             if (_text == null) return;
 
             ApplyOutline();
 
-            // Slider range can be zero-width, which would make the percentage undefined
-            var range = Slider.maxValue - Slider.minValue;
-            var percentage = range > 0f ? (Slider.value - Slider.minValue) / range * 100f : 0f;
-
-            _text.text = $"{Mathf.RoundToInt(percentage)}%";
+            _text.text = $"{Mathf.RoundToInt(fraction * 100f)}%";
         }
 
         // Set on the text's own material instance so other labels sharing the font material keep theirs.
