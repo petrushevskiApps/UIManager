@@ -6,7 +6,11 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
 {
     public class UIProgressBar : MonoBehaviour
     {
-        [Tooltip("A Filled image. Its fill method and origin set the bar's direction.")]
+        [Tooltip("Optional. When set, the bar drives this Slider. When empty, it drives the fill image's fill amount.")]
+        [SerializeField]
+        private Slider _slider;
+
+        [Tooltip("Takes the bar's color. Without a Slider it must be a Filled image, whose fill method and origin set the bar's direction.")]
         [SerializeField]
         private Image _fillImage;
 
@@ -45,12 +49,24 @@ namespace TwoOneTwoGames.UIManager.Components.NonInteractive
             var range = maximum - minimum;
             var fraction = range > 0f ? Mathf.Clamp01((current - minimum) / range) : 0f;
 
-            _fillImage.fillAmount = fraction;
+            if (_slider != null)
+            {
+                _slider.minValue = minimum;
+                _slider.maxValue = maximum;
+                _slider.value = current;
+            }
+            else
+            {
+                _fillImage.fillAmount = fraction;
+            }
+
             UpdateText(fraction);
         }
 
         private void SetColor(Color color)
         {
+            if (_fillImage == null) return;
+
             _fillImage.color = color;
         }
 
