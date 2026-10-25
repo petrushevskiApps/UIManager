@@ -29,7 +29,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         public IScreen GetScreen<T>() where T : IScreen
         {
-            return _popups.Find(x => x.GetType() == typeof(T));
+            return _popups.Find(x => x != null && x.GetType() == typeof(T));
         }
 
         private void OnAllScreensClosed(object sender, EventArgs e)
