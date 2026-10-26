@@ -63,7 +63,7 @@ namespace TwoOneTwoGames.UIManager.ScreenNavigation
 
         public IBackHandler GetActiveBackHandler()
         {
-            if (!_screenBackStack.IsEmpty()) return _screenBackStack.Peek();
+            if (_screenBackStack.Count > 0) return _screenBackStack.Peek();
 
             return null;
         }
