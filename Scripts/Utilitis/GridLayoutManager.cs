@@ -42,7 +42,7 @@ namespace TwoOneTwoGames.UIManager.Utilities
                         parameter.ChildsCount == transform.Cast<Transform>().Count(t => t.gameObject.activeSelf));
                 _gridLayoutGroup.constraintCount = constraint.GridCells;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 if (_gridConstraintParameters.Count > 0)
                 {
