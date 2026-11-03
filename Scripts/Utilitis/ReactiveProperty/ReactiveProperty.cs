@@ -30,8 +30,11 @@ namespace TwoOneTwoGames.UIManager.Utilities.ReactiveProperty
             }
         }
 
+        // A screen's Resume runs again when a popup on top of it closes, with no Hide in between, so a listener that
+        // is already subscribed is never added a second time.
         public void Subscribe(Action<T> onValueChangeListener, bool triggerOnSubscribe = true)
         {
+            ValueChanged -= onValueChangeListener;
             ValueChanged += onValueChangeListener;
             if (triggerOnSubscribe) onValueChangeListener?.Invoke(Value);
         }
